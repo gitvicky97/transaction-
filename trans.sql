@@ -1,11 +1,11 @@
 -- Column Created 
 
-ALTER TABLE [Baseball_Spring_2020].[dbo].[People]
+ALTER TABLE [Baseball_Fall_2020].[dbo].[People]
 ADD pds45_Total_Games_Played int;
 
 -- Column Created
 
-ALTER TABLE [Baseball_Spring_2020].[dbo].[People]
+ALTER TABLE [Baseball_Fall_2020].[dbo].[People]
 ADD pds45_Date_Last_Update date;
 
 -- Declaring variables
@@ -24,7 +24,7 @@ PRINT 'TRANSACTION UPDATE COMMAND START TIME - ' + (CAST(convert(varchar,getdate
 
 DECLARE updatecursor CURSOR STATIC FOR
 	SELECT [Appearances].[playerID], SUM([Appearances].[G_all]) AS Total_Games
-	FROM [Baseball_Spring_2020].[dbo].[People], [Baseball_Spring_2020].[dbo].[Appearances]
+	FROM [Baseball_Fall_2020].[dbo].[People], [Baseball_Fall_2020].[dbo].[Appearances]
 	WHERE [People].[playerID] = [Appearances].[playerID]
 	AND (pds45_Date_Last_Update <> @today OR pds45_Date_Last_Update is NULL)
 	GROUP BY [Appearances].[playerID];
@@ -49,7 +49,7 @@ OPEN updatecursor
 
 -- Updating record
 
-UPDATE [Baseball_Spring_2020].[dbo].[People]
+UPDATE [Baseball_Fall_2020].[dbo].[People]
 	SET pds45_Total_Games_Played = @Total_Games, pds45_Date_Last_Update = @today
 	WHERE playerID = @PlayerID
     SET @updateCount = @updateCount + 1
@@ -98,6 +98,6 @@ Print 'TRANSACTION UPDATE COMMAND END TIME - ' + (CAST(convert(varchar,getdate()
 SET nocount off;
 _
 SELECT [playerID], [pds45_Total_Games_Played],[pds45_Date_Last_Update]
-FROM [Baseball_Spring_2020].[dbo].[People]
+FROM [Baseball_Fall_2020].[dbo].[People]
 
 
