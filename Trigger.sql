@@ -1,5 +1,5 @@
 --Creating a total_Salary column in the PEOPLE table using Triggers
-use Baseball_Spring_2020
+use Baseball_Fall_2020
 
 
 IF not exists (Select *
